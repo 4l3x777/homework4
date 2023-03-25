@@ -25,7 +25,8 @@ using namespace std;
     \defgroup print_ip_helper
     @{
 */
-namespace print_ip_helper { 
+namespace print_ip_helper 
+{ 
     /*!
         \brief Helper variable. Determines ip address octets's delimeter.
     */
@@ -54,7 +55,8 @@ namespace print_ip_helper {
     struct helper_print_tuple
     {
         template <typename element0, typename... tail>
-        static constexpr void print(const tuple<element0, tail...>& tuple) {
+        static constexpr void print(const tuple<element0, tail...>& tuple) 
+        {
             auto element = get<sizeof...(tail) + 1 - typle_size>(tuple);
             static_assert(is_same_v<element0, decltype(element)>, "Different element's types in tuple!");
             cout << element;
@@ -84,7 +86,8 @@ namespace print_ip_helper {
     \defgroup print_ip
     @{
 */
-class print_ip {
+class print_ip 
+{
 public:
     /*!
         \brief Prints ip address represented as an integral type.
@@ -92,9 +95,11 @@ public:
         \returns print ip to stdout
     */
     template <typename T, typename std::enable_if<is_integral_v<T>,bool>::type = true>
-    print_ip(T value) {
+    print_ip(T value) 
+    {
         static const size_t constexpr number_of_octets = sizeof(T);
-        for (size_t i = number_of_octets; i--;) {
+        for (size_t i = number_of_octets; i--;) 
+        {
             cout << (value >> (i << 3) & 0xff);
             if (i > 0) cout << print_ip_helper::ip_delimeter;
         }
@@ -106,7 +111,8 @@ public:
         \param value is reference to string
         \returns print ip to stdout
     */
-    print_ip(const string& value) {
+    print_ip(const string& value) 
+    {
         cout << value << endl;
     }
 
@@ -116,8 +122,10 @@ public:
         \returns print ip to stdout
     */
     template<class T, typename std::enable_if<print_ip_helper::is_vector_or_list<T>{},bool>::type = true>
-    print_ip(const T& container) {
-        for (auto it = container.begin(); it != container.end(); ++it) {
+    print_ip(const T& container) 
+    {
+        for (auto it = container.begin(); it != container.end(); ++it) 
+        {
             cout << *it;
             if (it != prev(container.end())) cout << print_ip_helper::ip_delimeter;
         }
@@ -130,7 +138,8 @@ public:
         \returns print ip to stdou
     */
     template <typename... tail>
-    print_ip(const tuple<tail...>& tuple) {
+    print_ip(const tuple<tail...>& tuple) 
+    {
         print_ip_helper::helper_print_tuple<sizeof...(tail)>::print(tuple);
         cout << endl;
     }

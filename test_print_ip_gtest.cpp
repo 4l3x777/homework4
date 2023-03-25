@@ -5,15 +5,18 @@
 
 using namespace std;
 
-class TestPrintIp : public ::testing::Test {
+class TestPrintIp : public ::testing::Test 
+{
 	streambuf* old_stdout{nullptr};
 
 protected:
-	void SetUp() {
+	void SetUp() 
+	{
 		old_stdout = std::cout.rdbuf(new_stdout.rdbuf());
 	}
 
-	void TearDown() {
+	void TearDown() 
+	{
 		old_stdout = std::cout.rdbuf(old_stdout);
 	}
 
